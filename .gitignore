@@ -5,6 +5,7 @@
 .vs/*
 *.sln
 *.manifest
+.config/
 
 # Monogame
 .mgcb
