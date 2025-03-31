@@ -4,6 +4,7 @@
 .vs/
 .vs/*
 *.sln
+*.manifest
 
 # Monogame
 .mgcb
