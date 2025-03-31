@@ -1,52 +1,37 @@
-# Prerequisites
-*.d
+# Visual Studio
+.vscode/
+.vscode/*
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# Monogame
+.mgcb
+.mgcb/*.mgcb
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# Build Directories
+bin/
+obj/
 
-# Precompiled Headers
-*.gch
-*.pch
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+# Monogame Pipeline Tool
+PipelineOutput/
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# Temporary Files
+*.tmp
+*.temp
+*.log
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+# OS-specific files
+Thumbs.db
+.DS_Store
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Other
+*.bak
+*.swp
+*.pid
+*.seed
+*.pid.lock
