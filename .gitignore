@@ -1,0 +1,37 @@
+# Visual Studio
+.vscode/
+.vscode/*
+
+# Monogame
+.mgcb
+.mgcb/*.mgcb
+
+# Build Directories
+bin/
+obj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Monogame Pipeline Tool
+PipelineOutput/
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Other
+*.bak
+*.swp
+*.pid
+*.seed
+*.pid.lock
