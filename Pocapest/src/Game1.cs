@@ -22,7 +22,7 @@ namespace Pocapest
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
-			_lua.DoFile("Scripts/init.lua");
+			_lua.DoFile("src/Scripts/init.lua");
 
 			base.Initialize();
 		}

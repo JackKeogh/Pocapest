@@ -16,6 +16,14 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     <PackageReference Include="NLua" Version="1.7.4" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="src/Scripts/*.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
