@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NLua;
 
 namespace Pocapest
 {
@@ -8,17 +9,20 @@ namespace Pocapest
 	{
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;
+		private Lua _lua;
 
 		public Game1()
 		{
 			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
+			_lua = new Lua();
 		}
 
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
+			_lua.DoFile("Scripts/init.lua");
 
 			base.Initialize();
 		}
@@ -36,6 +40,7 @@ namespace Pocapest
 				Exit();
 
 			// TODO: Add your update logic here
+			_lua.GetFunction("Update").Call(gameTime);
 
 			base.Update(gameTime);
 		}
