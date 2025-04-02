@@ -17,6 +17,13 @@ namespace Pocapest.src.Engine.Components
 		public float Y { get; set; }
 	}
 
+	public class MovementComponent
+	{
+		public float X { get; set; }
+		public float Y { get; set; }
+		public bool CanMove { get; set; } = true;
+	}
+
 	public class SpriteComponent
 	{
 		public Texture2D Texture { get; set; }

@@ -13,13 +13,14 @@ namespace Pocapest.src.Engine
 		public EntityComponentSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
 		{
 			world = new WorldBuilder()
+				.AddSystem(new MovementSystem())
 				.AddSystem(new RenderingSystem(graphicsDevice, camera))
 				.Build();
 		}
 
 		public void Update(GameTime gameTime)
 		{
-			world.Draw(gameTime);
+			world.Update(gameTime);
 		}
 
 		public void Draw(GameTime gameTime)
