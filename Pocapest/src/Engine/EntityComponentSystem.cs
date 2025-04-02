@@ -13,6 +13,7 @@ namespace Pocapest.src.Engine
 		public EntityComponentSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
 		{
 			world = new WorldBuilder()
+				.AddSystem(new CameraSystem(camera))
 				.AddSystem(new MovementSystem())
 				.AddSystem(new RenderingSystem(graphicsDevice, camera))
 				.Build();
