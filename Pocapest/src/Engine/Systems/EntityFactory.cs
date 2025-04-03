@@ -24,11 +24,11 @@ namespace Pocapest.src.Engine.Systems
 			playerEntity.Attach(playerComponent);
 
 			// Set initial position
-			var positionComponent = new PositionComponent() { X = 0, Y = 0 };
+			var positionComponent = new PositionComponent() { X = 64, Y = 0 };
 			playerEntity.Attach(positionComponent);
 
 			// Attach player sprite
-			var spriteComponent = new SpriteComponent() { Texture = new Texture2D(this.graphicsDevice, 32, 32) };
+			var spriteComponent = new SpriteComponent() { Texture = TextureHandlingSystem.Instance().GetTexture("test") };
 			playerEntity.Attach(spriteComponent);
 
 			// Initialize velocity component

@@ -18,10 +18,10 @@
     <PackageReference Include="NLua" Version="1.7.4" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Scripts\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="src/Scripts/*.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="src/Textures/*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

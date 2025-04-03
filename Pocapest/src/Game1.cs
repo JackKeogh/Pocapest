@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
-using NLua;
 using Pocapest.src.Engine;
+using Pocapest.src.Engine.Systems;
 
 namespace Pocapest
 {
@@ -24,6 +24,7 @@ namespace Pocapest
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
+			TextureHandlingSystem.Instance(this.Content);
 			_camera = new OrthographicCamera(this.GraphicsDevice);
 			_ecs = new EntityComponentSystem(this.GraphicsDevice, this._camera);
 
