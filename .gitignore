@@ -26,6 +26,7 @@ obj/
 
 # Monogame Pipeline Tool
 PipelineOutput/
+Content.mgcb
 
 # Temporary Files
 *.tmp
