@@ -1,14 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.Extended.Collisions;
 using MonoGame.Extended.ECS;
 using MonoGame.Extended.ECS.Systems;
 using Pocapest.src.Engine.Components;
 using Pocapest.src.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pocapest.src.Engine.Systems
 {
