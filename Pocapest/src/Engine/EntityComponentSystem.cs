@@ -20,11 +20,13 @@ namespace Pocapest.src.Engine
 
 			this.world = new WorldBuilder()
 				.AddSystem(new CameraSystem(camera))
+				.AddSystem(new CollisionSystem())
 				.AddSystem(new MovementSystem())
 				.AddSystem(new RenderingSystem(graphicsDevice, camera))
 				.Build();
 
-			this.player = entityFactory.CreatePlayerEntity(world);
+			this.player = this.entityFactory.CreatePlayerEntity(this.world);
+			this.entityFactory.CreateTileEntity(this.world);
 		}
 
 		public void Update(GameTime gameTime)

@@ -1,11 +1,7 @@
-﻿using MonoGame.Extended.ECS;
+﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended.ECS;
 using Pocapest.src.Engine.Components;
 using Pocapest.src.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pocapest.src.Engine.Commands
 {
@@ -16,6 +12,7 @@ namespace Pocapest.src.Engine.Commands
 			var position = entity.Get<PositionComponent>();
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
+			var collider = entity.Get<ColliderComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -27,6 +24,9 @@ namespace Pocapest.src.Engine.Commands
 			movement.X = position.X;
 			movement.Y = position.Y - Constants.TileSize;
 			movement.CanMove = false;
+
+			// Set collider position
+			collider.Collider = new Rectangle ((int)movement.X, (int)movement.Y, Constants.TileSize, Constants.TileSize);
 
 			// Set velocity based on direction
 			velocity.X = 0;
@@ -41,6 +41,7 @@ namespace Pocapest.src.Engine.Commands
 			var position = entity.Get<PositionComponent>();
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
+			var collider = entity.Get<ColliderComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -52,6 +53,9 @@ namespace Pocapest.src.Engine.Commands
 			movement.X = position.X;
 			movement.Y = position.Y + Constants.TileSize;
 			movement.CanMove = false;
+
+			// Set collider position
+			collider.Collider = new Rectangle((int)movement.X, (int)movement.Y, Constants.TileSize, Constants.TileSize);
 
 			// Set velocity based on direction
 			velocity.X = 0;
@@ -66,6 +70,7 @@ namespace Pocapest.src.Engine.Commands
 			var position = entity.Get<PositionComponent>();
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
+			var collider = entity.Get<ColliderComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -77,6 +82,9 @@ namespace Pocapest.src.Engine.Commands
 			movement.X = position.X + Constants.TileSize;
 			movement.Y = position.Y;
 			movement.CanMove = false;
+
+			// Set collider position
+			collider.Collider = new Rectangle((int)movement.X, (int)movement.Y, Constants.TileSize, Constants.TileSize);
 
 			// Set velocity based on direction
 			velocity.X = 1;
@@ -91,6 +99,7 @@ namespace Pocapest.src.Engine.Commands
 			var position = entity.Get<PositionComponent>();
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
+			var collider = entity.Get<ColliderComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -102,6 +111,9 @@ namespace Pocapest.src.Engine.Commands
 			movement.X = position.X - Constants.TileSize;
 			movement.Y = position.Y;
 			movement.CanMove = false;
+
+			// Set collider position
+			collider.Collider = new Rectangle((int)movement.X, (int)movement.Y, Constants.TileSize, Constants.TileSize);
 
 			// Set velocity based on direction
 			velocity.X = -1;

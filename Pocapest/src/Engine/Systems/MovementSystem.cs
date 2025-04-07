@@ -41,50 +41,25 @@ namespace Pocapest.src.Engine.Systems
 
 				if (!target.CanMove)
 				{
-					var isBlocked = this.CheckMovement(entity);
+					var deltaX = velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds * Constants.TileSize;
+					var deltaY = velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds * Constants.TileSize;
 
-					if (!isBlocked)
+					var newPosition = new Vector2(position.X + deltaX, position.Y + deltaY);
+
+					position.X = newPosition.X;
+					position.Y = newPosition.Y;
+
+					if (Math.Abs(position.X - target.X) < 0.1f &&
+						Math.Abs(position.Y - target.Y) < 0.1f)
 					{
-						var deltaX = velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds * Constants.TileSize;
-						var deltaY = velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds * Constants.TileSize;
-
-						var newPosition = new Vector2(position.X + deltaX, position.Y + deltaY);
-
-						position.X = newPosition.X;
-						position.Y = newPosition.Y;
-
-						if (Math.Abs(position.X - target.X) < 0.1f &&
-							Math.Abs(position.Y - target.Y) < 0.1f)
-						{
-							position.X = target.X;
-							position.Y = target.Y;
-							velocity.X = 0;
-							velocity.Y = 0;
-							target.CanMove = true;
-						}
+						position.X = target.X;
+						position.Y = target.Y;
+						velocity.X = 0;
+						velocity.Y = 0;
+						target.CanMove = true;
 					}
 				}
 			}
-		}
-
-		public bool CheckMovement(int e)
-		{
-			foreach (var entity in this.ActiveEntities)
-			{
-				if (entity != e)
-				{
-					var rightCollider = this.colliderMapper.Get(e);
-					var leftCollider = this.colliderMapper.Get(entity);
-
-					if (rightCollider.Collider.Intersects(leftCollider.Collider) &&
-						leftCollider.ColliderType == Models.ColliderType.NotWalkable)
-					{
-						return true;
-					}
-				}
-			}
-
-			return false;
 		}
 	}
 }

@@ -10,4 +10,9 @@ namespace Pocapest.src.Engine.Components
 	{
 		public string Name { get; set; }
 	}
+
+	public class TileComponent
+	{
+
+	}
 }

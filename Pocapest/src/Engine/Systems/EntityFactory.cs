@@ -45,5 +45,28 @@ namespace Pocapest.src.Engine.Systems
 
 			return playerEntity;
 		}
+
+		public Entity CreateTileEntity(World world)
+		{
+			var entity = world.CreateEntity();
+
+			// Attach position component
+			var positionComponent = new PositionComponent() { X = 64, Y = 64 };
+			entity.Attach(positionComponent);
+
+			// Attach sprite component
+			var spriteComponent = new SpriteComponent() { Texture = TextureHandlingSystem.Instance().GetTexture("test") };
+			entity.Attach(spriteComponent);
+
+			// Attach collider component
+			var colliderComponent = new ColliderComponent() { ColliderType = ColliderType.NotWalkable, Collider = new Rectangle(64, 64, 32, 32) };
+			entity.Attach(colliderComponent);
+
+			// Attach t5ile component
+			var tileComponent = new TileComponent();
+			entity.Attach(tileComponent);
+
+			return entity;
+		}
 	}
 }
