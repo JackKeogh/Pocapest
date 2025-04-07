@@ -33,7 +33,7 @@ namespace Pocapest.src.Engine.Systems
 				{
 					var position = positionMapper.Get(entity);
 
-					camera.Position = new Vector2(position.X, position.Y);
+					//camera.Position = new Vector2(position.X, position.Y);
 					break;
 				}
 			}

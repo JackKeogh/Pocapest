@@ -24,7 +24,7 @@ namespace Pocapest.src.Engine.Systems
 			playerEntity.Attach(playerComponent);
 
 			// Set initial position
-			var positionComponent = new PositionComponent() { X = 64, Y = 0 };
+			var positionComponent = new PositionComponent() { X = 0, Y = 0 };
 			playerEntity.Attach(positionComponent);
 
 			// Attach player sprite

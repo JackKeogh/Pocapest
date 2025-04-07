@@ -10,28 +10,33 @@ namespace Pocapest.src.Engine
 	{
 		private World world;
 		private EntityFactory entityFactory;
+		private InputHandlingSystem inputHandlingSystem;
+		private Entity player;
 
 		public EntityComponentSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
 		{
-			entityFactory = new EntityFactory(graphicsDevice);
+			this.entityFactory = new EntityFactory(graphicsDevice);
+			this.inputHandlingSystem = new InputHandlingSystem();
 
-			world = new WorldBuilder()
+			this.world = new WorldBuilder()
 				.AddSystem(new CameraSystem(camera))
 				.AddSystem(new MovementSystem())
 				.AddSystem(new RenderingSystem(graphicsDevice, camera))
 				.Build();
 
-			entityFactory.CreatePlayerEntity(world);
+			this.player = entityFactory.CreatePlayerEntity(world);
 		}
 
 		public void Update(GameTime gameTime)
 		{
-			world.Update(gameTime);
+			this.inputHandlingSystem.HandleInput(player);
+
+			this.world.Update(gameTime);
 		}
 
 		public void Draw(GameTime gameTime)
 		{
-			world.Draw(gameTime);
+			this.world.Draw(gameTime);
 		}
 	}
 }
