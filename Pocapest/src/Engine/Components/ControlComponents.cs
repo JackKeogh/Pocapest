@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.ECS;
+using MonoGame.Extended.Graphics;
 using Pocapest.src.Models;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,12 @@ namespace Pocapest.src.Engine.Components
 	public class SpriteComponent
 	{
 		public Texture2D Texture { get; set; }
+		public Rectangle Source { get; set; }
+	}
+
+	public class AnimatedComponent
+	{
+		public AnimatedSprite AnimatedSprite { get; set; }
 	}
 
 	public class VelocityComponent

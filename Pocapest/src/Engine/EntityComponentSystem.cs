@@ -22,6 +22,7 @@ namespace Pocapest.src.Engine
 				.AddSystem(new CameraSystem(camera))
 				.AddSystem(new CollisionSystem())
 				.AddSystem(new MovementSystem())
+				.AddSystem(new AnimationSystem())
 				.AddSystem(new RenderingSystem(graphicsDevice, camera))
 				.Build();
 

@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended.ECS;
 using Pocapest.src.Engine.Components;
 using Pocapest.src.Models;
+using Pocapest.src.Helper;
+using MonoGame.Extended.Graphics;
+using NLua;
+using System;
 
 namespace Pocapest.src.Engine.Systems
 {
@@ -27,9 +31,14 @@ namespace Pocapest.src.Engine.Systems
 			var positionComponent = new PositionComponent() { X = 0, Y = 0 };
 			playerEntity.Attach(positionComponent);
 
-			// Attach player sprite
-			var spriteComponent = new SpriteComponent() { Texture = TextureHandlingSystem.Instance().GetTexture("test") };
-			playerEntity.Attach(spriteComponent);
+			// Attach animated sprite
+			var animatedComponent = new AnimatedComponent()
+			{
+				AnimatedSprite = new AnimatedSprite(this.CreateSpriteSheet("src/Scripts/Animations/PlayerAnimation",
+				TextureHandlingSystem.Instance().GetTexture("player")))
+			};
+			animatedComponent.AnimatedSprite.SetAnimation("idleRight");
+			playerEntity.Attach(animatedComponent);
 
 			// Initialize velocity component
 			var velocityComponent = new VelocityComponent() { X = 0, Y= 0 };
@@ -55,7 +64,11 @@ namespace Pocapest.src.Engine.Systems
 			entity.Attach(positionComponent);
 
 			// Attach sprite component
-			var spriteComponent = new SpriteComponent() { Texture = TextureHandlingSystem.Instance().GetTexture("test") };
+			var spriteComponent = new SpriteComponent()
+			{
+				Texture = TextureHandlingSystem.Instance().GetTexture("test"),
+				Source = new Rectangle(0, 0, Constants.TileSize, Constants.TileSize)
+			};
 			entity.Attach(spriteComponent);
 
 			// Attach collider component
@@ -67,6 +80,38 @@ namespace Pocapest.src.Engine.Systems
 			entity.Attach(tileComponent);
 
 			return entity;
+		}
+
+		private SpriteSheet CreateSpriteSheet(string obj, Texture2D texture)
+		{
+			Lua lua = new Lua();
+			lua.DoFile($"{obj}.lua");
+
+			var atlas = Texture2DAtlas.Create($"Atlas/{obj}", texture, 16, 32, 12, 1, 1);
+
+			var spritesheet = new SpriteSheet(obj, atlas);
+
+			LuaTable animations = (LuaTable)lua["animations"];
+
+			foreach (var animationame in animations.Keys)
+			{
+				LuaTable animation = (LuaTable)animations[animationame];
+
+				spritesheet.DefineAnimation(animationame.ToString(), builder =>
+				{
+					builder.IsLooping(bool.Parse(animation["isLooping"].ToString()));
+					builder.IsPingPong(bool.Parse(animation["isPingPong"].ToString()));
+					LuaTable frames = (LuaTable)animation["frames"];
+					foreach (LuaTable frame in frames.Values)
+					{
+						var frameindex = int.Parse(frame["frame"].ToString());
+						var duration = TimeSpan.FromSeconds((double)frame["duration"]);
+						builder.AddFrame(frameindex, duration);
+					}
+				});
+			}
+
+			return spritesheet;
 		}
 	}
 }

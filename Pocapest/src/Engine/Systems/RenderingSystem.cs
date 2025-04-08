@@ -3,7 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.ECS;
 using MonoGame.Extended.ECS.Systems;
+using MonoGame.Extended.Graphics;
 using Pocapest.src.Engine.Components;
+using Pocapest.src.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +19,12 @@ namespace Pocapest.src.Engine.Systems
 		private SpriteBatch spriteBatch;
 		private OrthographicCamera camera;
 		private ComponentMapper<SpriteComponent> spriteMapper;
+		private ComponentMapper<AnimatedComponent> animationMapper;
 		private ComponentMapper<PositionComponent> positionMapper;
 
 		public RenderingSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera) :
-			base(Aspect.All(typeof(SpriteComponent), typeof(PositionComponent)))
+			base(Aspect.All(typeof(PositionComponent))
+				.One(typeof(SpriteComponent), typeof(AnimatedComponent)))
 		{
 			this.spriteBatch = new SpriteBatch(graphicsDevice);
 			this.camera = camera;
@@ -28,6 +32,7 @@ namespace Pocapest.src.Engine.Systems
 		public override void Initialize(IComponentMapperService mapperService)
 		{
 			this.spriteMapper = mapperService.GetMapper<SpriteComponent>();
+			this.animationMapper = mapperService.GetMapper<AnimatedComponent>();
 			this.positionMapper = mapperService.GetMapper<PositionComponent>();
 		}
 
@@ -37,10 +42,18 @@ namespace Pocapest.src.Engine.Systems
 
 			foreach (var entity in this.ActiveEntities)
 			{
-				var sprite = this.spriteMapper.Get(entity);
 				var position = this.positionMapper.Get(entity);
 
-				spriteBatch.Draw(sprite.Texture, new Vector2(position.X, position.Y), Color.White);
+				if (spriteMapper.Has(entity))
+				{
+					var sprite = this.spriteMapper.Get(entity);
+					spriteBatch.Draw(sprite.Texture, new Rectangle((int)position.X, (int)position.Y, Constants.TileSize, Constants.TileSize), sprite.Source, Color.White);
+				}
+				else if (animationMapper.Has(entity))
+				{
+					var animation = this.animationMapper.Get(entity);
+					animation.AnimatedSprite.Draw(spriteBatch, new Vector2(position.X, position.Y - 32), 0, new Vector2(Constants.Scale));
+				}
 			}
 
 			spriteBatch.End();
