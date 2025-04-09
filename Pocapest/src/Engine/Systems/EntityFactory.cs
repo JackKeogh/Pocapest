@@ -7,6 +7,7 @@ using Pocapest.src.Helper;
 using MonoGame.Extended.Graphics;
 using NLua;
 using System;
+using System.Collections.Generic;
 
 namespace Pocapest.src.Engine.Systems
 {
@@ -35,9 +36,11 @@ namespace Pocapest.src.Engine.Systems
 			var animatedComponent = new AnimatedComponent()
 			{
 				AnimatedSprite = new AnimatedSprite(this.CreateSpriteSheet("src/Scripts/Animations/PlayerAnimation",
-				TextureHandlingSystem.Instance().GetTexture("player")))
+				TextureHandlingSystem.Instance().GetTexture("player"))),
+				Animations = new Dictionary<string, string>() { { "wDown", "walkDown" }, { "wUp", "walkUp" }, { "wLeft", "walkLeft" }, { "wRight", "walkRight" },
+																{ "iDown", "idleDown" }, { "iUp", "idleUp" }, { "iLeft", "idleLeft" }, { "iRight", "idleRight" } }
 			};
-			animatedComponent.AnimatedSprite.SetAnimation("idleRight");
+			animatedComponent.AnimatedSprite.SetAnimation("walkLeft");
 			playerEntity.Attach(animatedComponent);
 
 			// Initialize velocity component

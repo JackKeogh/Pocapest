@@ -21,9 +21,9 @@
 		isLooping = true,
 		isPingPong = true,
 		frames = {
-			{ frame = 6, duration = 0.5 },
-			{ frame = 7, duration = 0.5 },
-			{ frame = 8, duration = 0.5 }
+			{ frame = 6, duration = 0.1 },
+			{ frame = 7, duration = 0.1 },
+			{ frame = 8, duration = 0.1 }
 		}
 	},
 	walkRight = {
@@ -39,6 +39,7 @@
 		isLooping = false,
 		isPingPong = false,
 		frames = {
+			{ frame = 2, duration = 0.1 },
 			{ frame = 1, duration = 0.1 }
 		}
 	},
@@ -46,6 +47,7 @@
 		isLooping = false,
 		isPingPong = false,
 		frames = {
+			{ frame = 5, duration = 0.1 },
 			{ frame = 4, duration = 0.1 }
 		}
 	},
@@ -53,6 +55,7 @@
 		isLooping = false,
 		isPingPong = false,
 		frames = {
+			{ frame = 8, duration = 0.1 },
 			{ frame = 7, duration = 0.1 }
 		}
 	},
@@ -60,6 +63,7 @@
 		isLooping = false,
 		isPingPong = false,
 		frames = {
+			{ frame = 11, duration = 0.1 },
 			{ frame = 10, duration = 0.1 }
 		}
 	}

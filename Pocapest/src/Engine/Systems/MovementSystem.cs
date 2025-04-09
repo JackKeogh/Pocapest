@@ -54,8 +54,6 @@ namespace Pocapest.src.Engine.Systems
 					{
 						position.X = target.X;
 						position.Y = target.Y;
-						velocity.X = 0;
-						velocity.Y = 0;
 						target.CanMove = true;
 					}
 				}

@@ -34,6 +34,7 @@ namespace Pocapest.src.Engine.Components
 	public class AnimatedComponent
 	{
 		public AnimatedSprite AnimatedSprite { get; set; }
+		public Dictionary<string, string> Animations { get; set; }
 	}
 
 	public class VelocityComponent

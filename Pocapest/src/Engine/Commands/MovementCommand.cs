@@ -13,6 +13,7 @@ namespace Pocapest.src.Engine.Commands
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
 			var collider = entity.Get<ColliderComponent>();
+			var animator = entity.Get<AnimatedComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -31,6 +32,9 @@ namespace Pocapest.src.Engine.Commands
 			// Set velocity based on direction
 			velocity.X = 0;
 			velocity.Y = -1;
+
+			// Set animation
+			animator.AnimatedSprite.SetAnimation(animator.Animations["wUp"]);
 		}
 	}
 
@@ -42,6 +46,7 @@ namespace Pocapest.src.Engine.Commands
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
 			var collider = entity.Get<ColliderComponent>();
+			var animator = entity.Get<AnimatedComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -60,6 +65,9 @@ namespace Pocapest.src.Engine.Commands
 			// Set velocity based on direction
 			velocity.X = 0;
 			velocity.Y = 1;
+
+			// Set Animation
+			animator.AnimatedSprite.SetAnimation(animator.Animations["wDown"]);
 		}
 	}
 
@@ -71,6 +79,7 @@ namespace Pocapest.src.Engine.Commands
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
 			var collider = entity.Get<ColliderComponent>();
+			var animator = entity.Get<AnimatedComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -89,6 +98,9 @@ namespace Pocapest.src.Engine.Commands
 			// Set velocity based on direction
 			velocity.X = 1;
 			velocity.Y = 0;
+
+			// Set animation
+			animator.AnimatedSprite.SetAnimation(animator.Animations["wRight"]);
 		}
 	}
 
@@ -100,6 +112,7 @@ namespace Pocapest.src.Engine.Commands
 			var velocity = entity.Get<VelocityComponent>();
 			var movement = entity.Get<MovementComponent>();
 			var collider = entity.Get<ColliderComponent>();
+			var animator = entity.Get<AnimatedComponent>();
 
 			// Is the entity already moving
 			if (!movement.CanMove)
@@ -118,6 +131,9 @@ namespace Pocapest.src.Engine.Commands
 			// Set velocity based on direction
 			velocity.X = -1;
 			velocity.Y = 0;
+
+			// Set animation
+			animator.AnimatedSprite.SetAnimation(animator.Animations["wLeft"]);
 		}
 	}
 }

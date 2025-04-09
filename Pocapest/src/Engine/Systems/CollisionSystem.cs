@@ -11,6 +11,7 @@ namespace Pocapest.src.Engine.Systems
 		private ComponentMapper<ColliderComponent> collisionMapper;
 		private ComponentMapper<MovementComponent> movementMapper;
 		private ComponentMapper<PositionComponent> positionMapper;
+		private ComponentMapper<AnimatedComponent> animatorMapper;
 
 		public CollisionSystem() :
 			base (Aspect.All(typeof(ColliderComponent)).One(typeof(MovementComponent), typeof(TileComponent)))
@@ -23,6 +24,7 @@ namespace Pocapest.src.Engine.Systems
 			this.collisionMapper = mapperService.GetMapper<ColliderComponent>();
 			this.movementMapper = mapperService.GetMapper<MovementComponent>();
 			this.positionMapper = mapperService.GetMapper<PositionComponent>();
+			this.animatorMapper = mapperService.GetMapper<AnimatedComponent>();
 		}
 
 		public override void Update(GameTime gameTime)
