@@ -2,6 +2,7 @@
 using MonoGame.Extended.ECS;
 using MonoGame.Extended.ECS.Systems;
 using Pocapest.src.Engine.Components;
+using Pocapest.src.Helper;
 using System.Diagnostics;
 
 namespace Pocapest.src.Engine.Systems
@@ -50,21 +51,21 @@ namespace Pocapest.src.Engine.Systems
 					return;
 				}
 
-				if (currentAnim == "walkDown" && (currentFrame == 0 || currentFrame == 2))
+				if (currentAnim == Constants.Animation.WalkDown && (currentFrame == 0 || currentFrame == 2))
 				{
-					animator.AnimatedSprite.SetAnimation(animator.Animations["iDown"]);
+					animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.IdleDown]);
 				}
-				else if (currentAnim == "walkUp" && (currentFrame == 3 || currentFrame == 5))
+				else if (currentAnim == Constants.Animation.WalkUp && (currentFrame == 3 || currentFrame == 5))
 				{
-					animator.AnimatedSprite.SetAnimation(animator.Animations["iUp"]);
+					animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.WalkUp]);
 				}
-				else if (currentAnim == "walkLeft" && (currentFrame == 6 || currentFrame == 8))
+				else if (currentAnim == Constants.Animation.WalkLeft && (currentFrame == 6 || currentFrame == 8))
 				{
-					animator.AnimatedSprite.SetAnimation(animator.Animations["iLeft"]);
+					animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.IdleLeft]);
 				}
-				else if (currentAnim == "walkRight" && (currentFrame == 9 || currentFrame == 11))
+				else if (currentAnim == Constants.Animation.WalkRight && (currentFrame == 9 || currentFrame == 11))
 				{
-					animator.AnimatedSprite.SetAnimation(animator.Animations["iRight"]);
+					animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.IdleRight]);
 				}
 			}
 		}

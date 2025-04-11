@@ -27,7 +27,8 @@ namespace Pocapest.src.Engine
 				.Build();
 
 			this.player = this.entityFactory.CreatePlayerEntity(this.world);
-			this.entityFactory.CreateTileEntity(this.world);
+			this.entityFactory.CreateTileEntity(this.world, 32, 32);
+			this.entityFactory.CreateTileEntity(this.world, 64, 32, Models.ColliderType.Walkable);
 		}
 
 		public void Update(GameTime gameTime)

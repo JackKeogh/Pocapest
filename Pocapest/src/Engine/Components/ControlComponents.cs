@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.ECS;
 using MonoGame.Extended.Graphics;
+using Pocapest.src.Helper;
 using Pocapest.src.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace Pocapest.src.Engine.Components
 		public float X { get; set; }
 		public float Y { get; set; }
 		public bool CanMove { get; set; } = true;
+		public Direction Direction { get; set; }
 	}
 
 	public class SpriteComponent

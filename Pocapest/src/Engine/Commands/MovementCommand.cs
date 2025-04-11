@@ -34,7 +34,7 @@ namespace Pocapest.src.Engine.Commands
 			velocity.Y = -1;
 
 			// Set animation
-			animator.AnimatedSprite.SetAnimation(animator.Animations["wUp"]);
+			animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.WalkUp]);
 		}
 	}
 
@@ -67,7 +67,7 @@ namespace Pocapest.src.Engine.Commands
 			velocity.Y = 1;
 
 			// Set Animation
-			animator.AnimatedSprite.SetAnimation(animator.Animations["wDown"]);
+			animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.WalkDown]);
 		}
 	}
 
@@ -100,7 +100,7 @@ namespace Pocapest.src.Engine.Commands
 			velocity.Y = 0;
 
 			// Set animation
-			animator.AnimatedSprite.SetAnimation(animator.Animations["wRight"]);
+			animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.WalkRight]);
 		}
 	}
 
@@ -133,7 +133,7 @@ namespace Pocapest.src.Engine.Commands
 			velocity.Y = 0;
 
 			// Set animation
-			animator.AnimatedSprite.SetAnimation(animator.Animations["wLeft"]);
+			animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.WalkLeft]);
 		}
 	}
 }

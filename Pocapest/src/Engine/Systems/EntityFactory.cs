@@ -37,10 +37,9 @@ namespace Pocapest.src.Engine.Systems
 			{
 				AnimatedSprite = new AnimatedSprite(this.CreateSpriteSheet("src/Scripts/Animations/PlayerAnimation",
 				TextureHandlingSystem.Instance().GetTexture("player"))),
-				Animations = new Dictionary<string, string>() { { "wDown", "walkDown" }, { "wUp", "walkUp" }, { "wLeft", "walkLeft" }, { "wRight", "walkRight" },
-																{ "iDown", "idleDown" }, { "iUp", "idleUp" }, { "iLeft", "idleLeft" }, { "iRight", "idleRight" } }
+				Animations = this.CreateOverworldAnimationDictionary()
 			};
-			animatedComponent.AnimatedSprite.SetAnimation("walkLeft");
+			animatedComponent.AnimatedSprite.SetAnimation(Constants.Animation.WalkDown);
 			playerEntity.Attach(animatedComponent);
 
 			// Initialize velocity component
@@ -52,18 +51,18 @@ namespace Pocapest.src.Engine.Systems
 			playerEntity.Attach(colliderComponent);
 
 			// Initialize movement component
-			var movementComponent = new MovementComponent() { CanMove = true, X = 0, Y = 0 };
+			var movementComponent = new MovementComponent() { CanMove = true, X = 0, Y = 0, Direction = Direction.Down };
 			playerEntity.Attach(movementComponent);
 
 			return playerEntity;
 		}
 
-		public Entity CreateTileEntity(World world)
+		public Entity CreateTileEntity(World world, int x, int y, ColliderType colliderType = ColliderType.NotWalkable)
 		{
 			var entity = world.CreateEntity();
 
 			// Attach position component
-			var positionComponent = new PositionComponent() { X = 64, Y = 64 };
+			var positionComponent = new PositionComponent() { X = x, Y = y };
 			entity.Attach(positionComponent);
 
 			// Attach sprite component
@@ -75,7 +74,7 @@ namespace Pocapest.src.Engine.Systems
 			entity.Attach(spriteComponent);
 
 			// Attach collider component
-			var colliderComponent = new ColliderComponent() { ColliderType = ColliderType.NotWalkable, Collider = new Rectangle(64, 64, 32, 32) };
+			var colliderComponent = new ColliderComponent() { ColliderType = colliderType, Collider = new Rectangle(x, y, 32, 32) };
 			entity.Attach(colliderComponent);
 
 			// Attach t5ile component
@@ -115,6 +114,20 @@ namespace Pocapest.src.Engine.Systems
 			}
 
 			return spritesheet;
+		}
+
+		private Dictionary<string, string> CreateOverworldAnimationDictionary()
+		{
+			return new Dictionary<string, string>()
+				{ { Constants.Animation.WalkDown, Constants.Animation.WalkDown },
+				  { Constants.Animation.WalkUp, Constants.Animation.WalkUp },
+				  { Constants.Animation.WalkLeft, Constants.Animation.WalkLeft },
+				  { Constants.Animation.WalkRight, Constants.Animation.WalkRight },
+				  { Constants.Animation.IdleDown, Constants.Animation.IdleDown },
+				  { Constants.Animation.IdleUp, Constants.Animation.IdleUp },
+				  { Constants.Animation.IdleLeft, Constants.Animation.IdleLeft },
+				  { Constants.Animation.IdleRight, Constants.Animation.IdleRight }
+			};
 		}
 	}
 }
