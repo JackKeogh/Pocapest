@@ -57,7 +57,7 @@ namespace Pocapest.src.Engine.Systems
 				}
 				else if (currentAnim == Constants.Animation.WalkUp && (currentFrame == 3 || currentFrame == 5))
 				{
-					animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.WalkUp]);
+					animator.AnimatedSprite.SetAnimation(animator.Animations[Constants.Animation.IdleUp]);
 				}
 				else if (currentAnim == Constants.Animation.WalkLeft && (currentFrame == 6 || currentFrame == 8))
 				{

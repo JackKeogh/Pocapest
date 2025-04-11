@@ -33,7 +33,7 @@ namespace Pocapest.src.Engine
 
 		public void Update(GameTime gameTime)
 		{
-			this.inputHandlingSystem.HandleInput(player);
+			this.inputHandlingSystem.HandleInput(this.player, gameTime);
 
 			this.world.Update(gameTime);
 		}
