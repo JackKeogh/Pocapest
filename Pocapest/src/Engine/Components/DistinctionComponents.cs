@@ -15,4 +15,9 @@ namespace Pocapest.src.Engine.Components
 	{
 
 	}
+
+	public class AreaComponent
+	{
+		public bool ContainsPlayer = false;
+	}
 }

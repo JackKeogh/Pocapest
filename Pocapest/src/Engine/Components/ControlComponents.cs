@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 
 namespace Pocapest.src.Engine.Components
 {
+	public class ActiveComponent
+	{
+		public bool IsActive { get; set; } = true;
+	}
+
 	public class PositionComponent
 	{
 		public float X { get; set; }

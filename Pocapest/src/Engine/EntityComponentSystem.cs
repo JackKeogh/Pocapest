@@ -11,12 +11,14 @@ namespace Pocapest.src.Engine
 		private World world;
 		private EntityFactory entityFactory;
 		private InputHandlingSystem inputHandlingSystem;
+		AreaLoadingSystem areaLoadingSystem;
 		private Entity player;
 
 		public EntityComponentSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
 		{
 			this.entityFactory = new EntityFactory(graphicsDevice);
 			this.inputHandlingSystem = new InputHandlingSystem();
+			this.areaLoadingSystem = new AreaLoadingSystem(this.entityFactory);
 
 			this.world = new WorldBuilder()
 				.AddSystem(new CameraSystem(camera))
@@ -27,8 +29,9 @@ namespace Pocapest.src.Engine
 				.Build();
 
 			this.player = this.entityFactory.CreatePlayerEntity(this.world);
-			this.entityFactory.CreateTileEntity(this.world, 32, 32);
-			this.entityFactory.CreateTileEntity(this.world, 64, 32, Models.ColliderType.Walkable);
+			this.areaLoadingSystem.LoadAreas(this.world);
+			//this.entityFactory.CreateTileEntity(this.world, "test", 32, 32);
+			//this.entityFactory.CreateTileEntity(this.world, "test", 64, 32, Models.ColliderType.Walkable);
 		}
 
 		public void Update(GameTime gameTime)

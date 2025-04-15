@@ -21,6 +21,7 @@ namespace Pocapest.src.Engine.Systems
 		private ComponentMapper<SpriteComponent> spriteMapper;
 		private ComponentMapper<AnimatedComponent> animationMapper;
 		private ComponentMapper<PositionComponent> positionMapper;
+		private ComponentMapper<ActiveComponent> activeMapper;
 
 		public RenderingSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera) :
 			base(Aspect.All(typeof(PositionComponent))
@@ -34,6 +35,7 @@ namespace Pocapest.src.Engine.Systems
 			this.spriteMapper = mapperService.GetMapper<SpriteComponent>();
 			this.animationMapper = mapperService.GetMapper<AnimatedComponent>();
 			this.positionMapper = mapperService.GetMapper<PositionComponent>();
+			this.activeMapper = mapperService.GetMapper<ActiveComponent>();
 		}
 
 		public override void Draw(GameTime gameTime)
@@ -43,16 +45,20 @@ namespace Pocapest.src.Engine.Systems
 			foreach (var entity in this.ActiveEntities)
 			{
 				var position = this.positionMapper.Get(entity);
+				var active = this.activeMapper.Get(entity);
 
-				if (spriteMapper.Has(entity))
+				if (active.IsActive)
 				{
-					var sprite = this.spriteMapper.Get(entity);
-					spriteBatch.Draw(sprite.Texture, new Rectangle((int)position.X, (int)position.Y, Constants.TileSize, Constants.TileSize), sprite.Source, Color.White);
-				}
-				else if (animationMapper.Has(entity))
-				{
-					var animation = this.animationMapper.Get(entity);
-					animation.AnimatedSprite.Draw(spriteBatch, new Vector2(position.X, position.Y - 32), 0, new Vector2(Constants.Scale));
+					if (spriteMapper.Has(entity))
+					{
+						var sprite = this.spriteMapper.Get(entity);
+						spriteBatch.Draw(sprite.Texture, new Rectangle((int)position.X, (int)position.Y, Constants.TileSize, Constants.TileSize), sprite.Source, Color.White);
+					}
+					else if (animationMapper.Has(entity))
+					{
+						var animation = this.animationMapper.Get(entity);
+						animation.AnimatedSprite.Draw(spriteBatch, new Vector2(position.X, position.Y - 32), 0, new Vector2(Constants.Scale));
+					}
 				}
 			}
 

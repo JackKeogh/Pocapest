@@ -47,17 +47,21 @@ namespace Pocapest.src.Engine.Systems
 			playerEntity.Attach(velocityComponent);
 
 			// Initialize collider component
-			var colliderComponent = new ColliderComponent() { Collider = new Rectangle(0, 0, 32, 32), ColliderType = ColliderType.NotWalkable };
+			var colliderComponent = new ColliderComponent() { Collider = new Rectangle(0, 0, Constants.TileSize, Constants.TileSize), ColliderType = ColliderType.NotWalkable };
 			playerEntity.Attach(colliderComponent);
 
 			// Initialize movement component
 			var movementComponent = new MovementComponent() { CanMove = true, X = 0, Y = 0, Direction = Direction.Down };
 			playerEntity.Attach(movementComponent);
 
+			// Initialize active component
+			var activeComponent = new ActiveComponent() { IsActive = true };
+			playerEntity.Attach(activeComponent);
+
 			return playerEntity;
 		}
 
-		public Entity CreateTileEntity(World world, int x, int y, ColliderType colliderType = ColliderType.NotWalkable)
+		public Entity CreateTileEntity(World world, string texture, int x, int y, ColliderType colliderType = ColliderType.NotWalkable)
 		{
 			var entity = world.CreateEntity();
 
@@ -68,18 +72,22 @@ namespace Pocapest.src.Engine.Systems
 			// Attach sprite component
 			var spriteComponent = new SpriteComponent()
 			{
-				Texture = TextureHandlingSystem.Instance().GetTexture("test"),
+				Texture = TextureHandlingSystem.Instance().GetTexture(texture),
 				Source = new Rectangle(0, 0, Constants.TileSize, Constants.TileSize)
 			};
 			entity.Attach(spriteComponent);
 
 			// Attach collider component
-			var colliderComponent = new ColliderComponent() { ColliderType = colliderType, Collider = new Rectangle(x, y, 32, 32) };
+			var colliderComponent = new ColliderComponent() { ColliderType = colliderType, Collider = new Rectangle(x, y, Constants.TileSize, Constants.TileSize) };
 			entity.Attach(colliderComponent);
 
-			// Attach t5ile component
+			// Attach tile component
 			var tileComponent = new TileComponent();
 			entity.Attach(tileComponent);
+
+			// Initialize active component
+			var activeComponent = new ActiveComponent() { IsActive = true };
+			entity.Attach(activeComponent);
 
 			return entity;
 		}

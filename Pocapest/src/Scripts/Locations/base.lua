@@ -1,0 +1,3 @@
+﻿areas = {
+	{ name = "testarea" }
+}
