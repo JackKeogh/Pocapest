@@ -61,7 +61,7 @@ namespace Pocapest.src.Engine.Systems
 			return playerEntity;
 		}
 
-		public Entity CreateTileEntity(World world, string texture, int x, int y, ColliderType colliderType = ColliderType.NotWalkable)
+		public Entity CreateTileEntity(World world, string texture, int x, int y, ColliderType colliderType = ColliderType.NotWalkable, int srcX = 0, int srcY = 0, int srcW = 16, int srcH = 16)
 		{
 			var entity = world.CreateEntity();
 
@@ -73,7 +73,7 @@ namespace Pocapest.src.Engine.Systems
 			var spriteComponent = new SpriteComponent()
 			{
 				Texture = TextureHandlingSystem.Instance().GetTexture(texture),
-				Source = new Rectangle(0, 0, Constants.TileSize, Constants.TileSize)
+				Source = new Rectangle(srcX, srcY, srcW, srcH)
 			};
 			entity.Attach(spriteComponent);
 

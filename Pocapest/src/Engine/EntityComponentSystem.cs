@@ -11,7 +11,7 @@ namespace Pocapest.src.Engine
 		private World world;
 		private EntityFactory entityFactory;
 		private InputHandlingSystem inputHandlingSystem;
-		AreaLoadingSystem areaLoadingSystem;
+		private AreaLoadingSystem areaLoadingSystem;
 		private Entity player;
 
 		public EntityComponentSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
@@ -30,8 +30,6 @@ namespace Pocapest.src.Engine
 
 			this.player = this.entityFactory.CreatePlayerEntity(this.world);
 			this.areaLoadingSystem.LoadAreas(this.world);
-			//this.entityFactory.CreateTileEntity(this.world, "test", 32, 32);
-			//this.entityFactory.CreateTileEntity(this.world, "test", 64, 32, Models.ColliderType.Walkable);
 		}
 
 		public void Update(GameTime gameTime)

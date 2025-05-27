@@ -2,9 +2,11 @@
 using MonoGame.Extended.ECS;
 using NLua;
 using Pocapest.src.Engine.GameMechanics;
+using Pocapest.src.Helper;
 using Pocapest.src.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Pocapest.src.Engine.Systems
 {
@@ -51,6 +53,8 @@ namespace Pocapest.src.Engine.Systems
 				int.Parse(bounds["h"].ToString())
 				);
 
+			this.LoadAreaBase(area, lArea, world);
+
 			foreach (LuaTable tile in tiles.Values)
 			{
 				string texture = tile["TextureName"].ToString();
@@ -58,11 +62,48 @@ namespace Pocapest.src.Engine.Systems
 				int y = int.Parse(tile["Y"].ToString());
 				ColliderType type = Enum.Parse<ColliderType>(tile["ColliderType"].ToString());
 
-				Entity entity = this.Factory.CreateTileEntity(world, texture, x, y, type);
+				Entity entity = null;
+				if (texture.Equals("grass"))
+				{
+					int srcX = Constants.TileSize * RandomNumberGenerator.GetRandomInt(1, 4);
+					entity = this.Factory.CreateTileEntity(world, texture, x, y, type, srcX, srcW: 64);
+				}
+				else
+				{
+					entity = this.Factory.CreateTileEntity(world, texture, x, y, type);
+				}
 				area.TrackEntity(entity);
 			}
 
 			return area;
+		}
+
+		private void LoadAreaBase(Area area, LuaTable lArea, World world)
+		{
+			string texture = lArea["base"].ToString();
+			int seed = int.Parse(lArea["seed"].ToString());
+			int cellsW = area.Bounds.Width / Constants.TileSize;
+			int cellsH = area.Bounds.Height / Constants.TileSize;
+
+			RandomNumberGenerator.UpdateSeed(seed);
+
+			for (int y = 0; y < cellsH; y++)
+			{
+				for (int x = 0; x < cellsW; x++)
+				{
+					int xPos = x * Constants.TileSize;
+					int yPos = y * Constants.TileSize;
+
+					int ranX = RandomNumberGenerator.GetRandomInt(0, 4) * 16;
+
+					Debug.WriteLine(ranX);
+
+					Entity e = this.Factory.CreateTileEntity(world, texture, xPos, yPos, ColliderType.Walkable, srcX: ranX, srcW: 64, srcH:16);
+					area.TrackEntity(e);
+				}
+			}
+
+			RandomNumberGenerator.RandomiseSeed();
 		}
 	}
 }

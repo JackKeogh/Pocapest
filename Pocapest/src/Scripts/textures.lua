@@ -2,5 +2,6 @@
 
 textures = {
     { name = 'test', path = 'test' },
-    { name = 'player', path = 'player'}
+    { name = 'player', path = 'player' },
+    { name = 'grass', path = 'grass' }
 }
